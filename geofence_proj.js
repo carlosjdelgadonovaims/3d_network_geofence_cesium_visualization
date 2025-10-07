@@ -21,8 +21,6 @@ import {
   PathGraphics,
 } from "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Cesium.js";
 
-import "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Widgets/widgets.css";
-
 window.CESIUM_BASE_URL = "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/";
 
 // Your access token can be found at: https://ion.cesium.com/tokens.
