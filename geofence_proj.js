@@ -1,32 +1,9 @@
-import {
-  Viewer,
-  Cartesian3,
-  createOsmBuildingsAsync,
-  Ion,
-  Math,
-  IonImageryProvider,
-  Terrain,
-  GeoJsonDataSource,
-  HeightReference,
-  HeadingPitchRange,
-  Color,
-  JulianDate,
-  SampledPositionProperty,
-  VelocityOrientationProperty,
-  IonResource,
-  PolylineOutlineMaterialProperty,
-  PolylineGlowMaterialProperty,
-  TimeInterval,
-  TimeIntervalCollection,
-  PathGraphics,
-} from "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Cesium.js";
-
 window.CESIUM_BASE_URL = "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/";
 
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // This is the default access token from your ion account
 
-Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1YzVjYWY1Mi1jMDBhLTQ0ZWQtYmJiMy0wNmQzOTAwM2MwNjMiLCJpZCI6MzMzMTE3LCJpYXQiOjE3NTkyMDE0MTN9.Y0NpSyTchNmShBCoLNTM54qcj_hOsLK_1F5TIWFDiUI';
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1YzVjYWY1Mi1jMDBhLTQ0ZWQtYmJiMy0wNmQzOTAwM2MwNjMiLCJpZCI6MzMzMTE3LCJpYXQiOjE3NTkyMDE0MTN9.Y0NpSyTchNmShBCoLNTM54qcj_hOsLK_1F5TIWFDiUI';
 
 
 // Local JSON filenames (same directory)
@@ -37,20 +14,20 @@ const FLIGHT_JSON = {
 };
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
-const viewer = new Viewer('cesiumContainer', {
-  imageryProvider: new IonImageryProvider({ assetId: 2 }), // Cesium World Imagery
-  terrain: Terrain.fromWorldTerrain(),
+const viewer = new Cesium.Viewer('cesiumContainer', {
+  imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }), // Cesium World Imagery
+  terrain: Cesium.Terrain.fromWorldTerrain(),
 });
 
 // Add Cesium OSM Buildings, a global 3D buildings layer.
-const buildingTileset = await createOsmBuildingsAsync();
+const buildingTileset = await Cesium.createOsmBuildingsAsync();
 viewer.scene.primitives.add(buildingTileset);
 
-const resource_geofence_1 = await IonResource.fromAssetId(3831256);
-const resource_geofence_2 = await IonResource.fromAssetId(3831260);
-const resource_geofence_3 = await IonResource.fromAssetId(3831264);
-const resource_hubs = await IonResource.fromAssetId(3832591);//3746303 v2 / 3746310 v1
-const resource_geofence_emergency = await IonResource.fromAssetId(3839093)
+const resource_geofence_1 = await Cesium.IonResource.fromAssetId(3831256);
+const resource_geofence_2 = await Cesium.IonResource.fromAssetId(3831260);
+const resource_geofence_3 = await Cesium.IonResource.fromAssetId(3831264);
+const resource_hubs = await Cesium.IonResource.fromAssetId(3832591);//3746303 v2 / 3746310 v1
+const resource_geofence_emergency = await Cesium.IonResource.fromAssetId(3839093)
 
 async function loadFlightPath(filename) {
   try {
@@ -73,23 +50,23 @@ const [flightData, flightData_normal_path, flightData_emergency] = await Promise
 ]);
 
 function loadGeofence(viewer, resource, colorBytes, heightProp, targetVarName) {
-  GeoJsonDataSource.load(resource).then(dataSource => {
+  Cesium.GeoJsonDataSource.load(resource).then(dataSource => {
     viewer.dataSources.add(dataSource);
     window[targetVarName] = dataSource; // Store it globally if needed like before
 
     const entities = dataSource.entities.values;
     for (const entity of entities) {
       entity.polygon.height = 0;
-      entity.polygon.heightReference = HeightReference.CLAMP_TO_GROUND;
+      entity.polygon.heightReference = Cesium.HeightReference.CLAMP_TO_GROUND;
 
       // Set extrusion height dynamically
       entity.polygon.extrudedHeight = entity.properties[heightProp];
-      entity.polygon.extrudedHeightReference = HeightReference.RELATIVE_TO_GROUND;
+      entity.polygon.extrudedHeightReference = Cesium.HeightReference.RELATIVE_TO_GROUND;
 
       // Apply color
-      const color = Color.fromBytes(...colorBytes);
+      const color = Cesium.Color.fromBytes(...colorBytes);
       entity.polygon.material = color;
-      entity.polygon.outlineColor = Color.BLACK.withAlpha(0.3);
+      entity.polygon.outlineColor = Cesium.Color.BLACK.withAlpha(0.3);
     }
   });
 }
@@ -103,14 +80,14 @@ loadGeofence(viewer, resource_geofence_3, [247, 191, 99, 110], "h_buffer_m", "ge
 loadGeofence(viewer, resource_hubs, [255, 0, 0, 255], "POINT_Z", "geohubsDataSource");
 
 viewer.camera.flyTo({
-  destination: Cartesian3.fromDegrees(
+  destination: Cesium.Cartesian3.fromDegrees(
     -74.34352939984555,
     40.229377873086555,
     35000
   ),
   orientation: {
-    heading: Math.toRadians(30),
-    pitch: Math.toRadians(-35),
+    heading: Cesium.Math.toRadians(30),
+    pitch: Cesium.Math.toRadians(-35),
     roll: 0
   },
   duration: 3  // seconds for smooth fly animation
@@ -118,15 +95,15 @@ viewer.camera.flyTo({
 
 // Generic function to load and style GeoJSON line data from Cesium Ion
 async function loadGeoJsonLinesFromIon(assetId, viewer, {
-  color = Color.YELLOW,      // Default line color
+  color = Cesium.Color.YELLOW,      // Default line color
   width = 4,                 // Line width in screen pixels
   outline = true,            // Enable black outline for contrast
   clampToGround = false,     // Set true if lines should follow terrain
   opacity = 0.7              // Transparency of main color
 } = {}) {
   try {
-    const resource = await IonResource.fromAssetId(assetId);
-    const dataSource = await GeoJsonDataSource.load(resource, { clampToGround });
+    const resource = await Cesium.IonResource.fromAssetId(assetId);
+    const dataSource = await Cesium.GeoJsonDataSource.load(resource, { clampToGround });
     viewer.dataSources.add(dataSource);
 
     for (const entity of dataSource.entities.values) {
@@ -136,14 +113,14 @@ async function loadGeoJsonLinesFromIon(assetId, viewer, {
 
       // Apply material based on 'outline' option
       if (outline) {
-        entity.polyline.material = new PolylineOutlineMaterialProperty({
-          color: color.withAlpha(opacity),
+        entity.polyline.material = new Cesium.PolylineOutlineMaterialProperty({
+          color: Cesium.color.withAlpha(opacity),
           outlineWidth: 0.4,
-          outlineColor: Color.BLACK
+          outlineColor: Cesium.Color.BLACK
         });
       } else {
-        entity.polyline.material = new PolylineGlowMaterialProperty({
-          color: color.withAlpha(opacity),
+        entity.polyline.material = new Cesium.PolylineGlowMaterialProperty({
+          color: Cesium.color.withAlpha(opacity),
           glowPower: 0.18
         });
       }
@@ -165,7 +142,7 @@ async function loadGeoJsonLinesFromIon(assetId, viewer, {
 (async () => {
   // Normal flight path (yellow)
   await loadGeoJsonLinesFromIon(3831242, viewer, {
-    color: Color.YELLOW,
+    color: Cesium.Color.YELLOW,
     width: 5,
     outline: true,
     clampToGround: false
@@ -182,7 +159,7 @@ async function createFlightPath({
   startTime = "2020-03-09T23:10:00Z",
   timeStep = 100,
   pauseDuration = 5,
-  color = Color.ORANGE,
+  color = Cesium.Color.ORANGE,
   modelScale = 2.0,
   playbackSpeed = 50,
   showPoints = true,
@@ -208,9 +185,9 @@ async function createFlightPath({
   });
 
   // --- Time configuration ---
-  const start = JulianDate.fromIso8601(startTime);
+  const start = Cesium.JulianDate.fromIso8601(startTime);
   const totalSeconds = timeStep * (data.length - 1);
-  const stop = JulianDate.addSeconds(start, totalSeconds, new JulianDate());
+  const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
 
   // --- Update Cesium viewer clock ---
   viewer.clock.startTime = start.clone();
@@ -221,12 +198,12 @@ async function createFlightPath({
   viewer.clock.shouldAnimate = true;
 
   // --- Define flight position samples ---
-  const positionProperty = new SampledPositionProperty();
+  const positionProperty = new Cesium.SampledPositionProperty();
 
   data.forEach((point, i) => {
     const offset = i === 0 ? 0 : pauseDuration;
-    const time = JulianDate.addSeconds(start, i * timeStep + offset, new JulianDate());
-    const position = Cartesian3.fromDegrees(point.longitude, point.latitude, point.height);
+    const time = Cesium.JulianDate.addSeconds(start, i * timeStep + offset, new Cesium.JulianDate());
+    const position = Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.height);
     positionProperty.addSample(time, position);
   });
 
@@ -247,32 +224,32 @@ async function createFlightPath({
     data.forEach(point => {
       viewer.entities.add({
         description: `Location: (${point.longitude}, ${point.latitude}, ${point.height})`,
-        position: Cartesian3.fromDegrees(point.longitude, point.latitude, point.height),
+        position: Cesium.Cartesian3.fromDegrees(point.longitude, point.latitude, point.height),
         point: { pixelSize: 8, color }
       });
     });
   }
 
   // --- Load airplane model and animate ---
-  const airTaxiUri = await IonResource.fromAssetId(assetId);
+  const airTaxiUri = await Cesium.IonResource.fromAssetId(assetId);
   const airplaneEntity = viewer.entities.add({
     name: `${name}-airplane`,
-    availability: new TimeIntervalCollection([
-      new TimeInterval({ start, stop })
+    availability: new Cesium.TimeIntervalCollection([
+      new Cesium.TimeInterval({ start, stop })
     ]),
     position: positionProperty,
-    orientation: new VelocityOrientationProperty(positionProperty),
+    orientation: new Cesium.VelocityOrientationProperty(positionProperty),
     model: {
       uri: airTaxiUri,
       scale: modelScale,
       minimumPixelSize: 64
     },
-    path: new PathGraphics({ width: 2 })
+    path: new Cesium.PathGraphics({ width: 2 })
   });
 
   if (flyTo) {
     viewer.flyTo(airplaneEntity, {
-      offset: new HeadingPitchRange(0.0, -0.5, 3000.0)
+      offset: new Cesium.HeadingPitchRange(0.0, -0.5, 3000.0)
     });
   }
 
@@ -294,7 +271,7 @@ async function activateMode1() {
       viewer,
       data: flightData,
       name: "default",
-      color: Color.ORANGE,
+      color: Cesium.Color.ORANGE,
       flyTo: true
     });
 
@@ -314,7 +291,7 @@ async function activateMode2() {
       viewer,
       data: flightData_normal_path,
       name: "normal",
-      color: Color.YELLOW,
+      color: Cesium.Color.YELLOW,
     });
 
     console.log("Mode 2 loaded successfully ✅");
@@ -334,7 +311,7 @@ async function activateMode3() {
 
     // Emergency cyan flight lines
     await loadGeoJsonLinesFromIon(3839143, viewer, {
-      color: Color.CYAN,
+      color: Cesium.Color.CYAN,
       width: 5,
       outline: true,
       clampToGround: false
@@ -345,7 +322,7 @@ async function activateMode3() {
       viewer,
       data: flightData_emergency,
       name: "emergency",
-      color: Color.CYAN,
+      color: Cesium.Color.CYAN,
       flyTo: true
     });
     
