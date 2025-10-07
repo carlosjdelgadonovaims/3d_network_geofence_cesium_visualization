@@ -118,13 +118,13 @@ async function main() {
         // Apply material based on 'outline' option
         if (outline) {
           entity.polyline.material = new Cesium.PolylineOutlineMaterialProperty({
-            color: Cesium.Color.withAlpha(opacity),
+            color: Cesium.Color.fromAlpha(opacity),
             outlineWidth: 0.4,
             outlineColor: Cesium.Color.BLACK
           });
         } else {
           entity.polyline.material = new Cesium.PolylineGlowMaterialProperty({
-            color: Cesium.Color.withAlpha(opacity),
+            color: Cesium.Color.fromAlpha(opacity),
             glowPower: 0.18
           });
         }
