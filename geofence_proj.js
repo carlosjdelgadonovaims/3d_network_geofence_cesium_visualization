@@ -1,5 +1,13 @@
 window.CESIUM_BASE_URL = "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/";
 
+window.onload = function () {
+  const viewer = new Cesium.Viewer("cesiumContainer", {
+    terrain: Cesium.Terrain.fromWorldTerrain(),
+  });
+
+  console.log("Cesium loaded successfully!", viewer);
+};
+
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // This is the default access token from your ion account
 
