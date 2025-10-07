@@ -23,9 +23,9 @@ import {
   TimeInterval,
   TimeIntervalCollection,
   PathGraphics,
-} from "cesium";
-import fs from 'fs';
-import "cesium/Build/Cesium/Widgets/widgets.css";
+} from "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Cesium.js";
+import "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Widgets/widgets.css";
+
 
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // This is the default access token from your ion account
