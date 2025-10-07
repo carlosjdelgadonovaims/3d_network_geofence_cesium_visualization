@@ -1,7 +1,3 @@
-// The URL on your server where CesiumJS's static files are hosted.
-//window.CESIUM_BASE_URL = '/';
-//window.CESIUM_BASE_URL = '/cesium';
-
 import {
   Viewer,
   Cartesian3,
@@ -24,8 +20,10 @@ import {
   TimeIntervalCollection,
   PathGraphics,
 } from "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Cesium.js";
+
 import "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Widgets/widgets.css";
 
+window.CESIUM_BASE_URL = "https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/";
 
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // This is the default access token from your ion account
