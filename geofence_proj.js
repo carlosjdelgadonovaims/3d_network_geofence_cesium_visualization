@@ -1,6 +1,6 @@
 // The URL on your server where CesiumJS's static files are hosted.
 //window.CESIUM_BASE_URL = '/';
-window.CESIUM_BASE_URL = '/cesium';
+//window.CESIUM_BASE_URL = '/cesium';
 
 import {
   Viewer,
