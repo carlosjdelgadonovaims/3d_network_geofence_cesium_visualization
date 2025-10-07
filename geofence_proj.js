@@ -38,7 +38,7 @@ async function main() {
 
   async function loadFlightPath(filename) {
     try {
-      const response = await fetch(`/flightpaths/${filename}`);
+      const response = await fetch(`./public/flightpaths/${filename}`);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return await response.json();
     } catch (err) {
