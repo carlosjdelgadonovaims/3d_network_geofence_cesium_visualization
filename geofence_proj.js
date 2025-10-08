@@ -261,10 +261,32 @@ async function main() {
     return airplaneEntity;
   }
 
+function clearPreviousModes() {
+  console.log("🧹 Clearing previous modes...");
+
+  // Remove all entities except the base geofences
+  viewer.entities.removeAll();
+
+  // Optionally remove data sources except the base ones
+  const keepList = [
+    window.geofence200DataSource,
+    window.geofence300DataSource,
+    window.geofence600DataSource
+  ];
+
+  viewer.dataSources._dataSources
+    .filter(ds => !keepList.includes(ds))
+    .forEach(ds => viewer.dataSources.remove(ds));
+
+  console.log("Previous modes cleared ✅");
+}
+
+
 
   // === Mode 1: Normal flight path ===
   async function activateMode1() {
     console.log("Activating Mode 1 (Normal)...");
+    clearPreviousModes();
 
     try {
       // Load normal flight line from Ion
@@ -287,7 +309,7 @@ async function main() {
 
   async function activateMode2() {
     console.log("Activating Mode 2 (Pre emergency)...");
-
+    clearPreviousModes();
     try {
 
       // Create normal flight path from JSON data
@@ -308,7 +330,7 @@ async function main() {
   // === Mode 3: Default + Emergency flight paths ===
   async function activateMode3() {
     console.log("Activating Mode 3 (Emergency)...");
-
+    clearPreviousModes();
     try {
 
       loadGeofence(viewer, resource_geofence_emergency, [245, 39, 224, 200], "h_buffer_m", "geofenceEmergencyDataSource");
@@ -335,6 +357,17 @@ async function main() {
     } catch (err) {
       console.error("Error loading Mode 3:", err);
     }
+  }
+
+  function highlightActiveButton(activeId) {
+    ["mode1-btn", "mode2-btn", "mode3-btn"].forEach(id => {
+      const btn = document.getElementById(id);
+      if (id === activeId) {
+        btn.style.background = "#00b894";
+      } else {
+        btn.style.background = "#444";
+      }
+    });
   }
 
   // === 🟢 TOGGLE FUNCTIONS ===
@@ -372,14 +405,17 @@ async function main() {
 
   document.getElementById("mode1-btn").addEventListener("click", async () => {
     await activateMode1();
+    highlightActiveButton("mode1-btn");
   });
 
   document.getElementById("mode2-btn").addEventListener("click", async () => {
     await activateMode2();
+    highlightActiveButton("mode2-btn");
   });
 
   document.getElementById("mode3-btn").addEventListener("click", async () => {
     await activateMode3();
+    highlightActiveButton("mode3-btn");
   });
 
 }
