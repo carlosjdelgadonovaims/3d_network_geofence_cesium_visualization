@@ -271,7 +271,8 @@ function clearPreviousModes() {
   const keepList = [
     window.geofence200DataSource,
     window.geofence300DataSource,
-    window.geofence600DataSource
+    window.geofence600DataSource,
+    window.geohubsDataSource
   ];
 
   viewer.dataSources._dataSources
@@ -364,22 +365,43 @@ function clearPreviousModes() {
     console.log("🔄 Resetting viewer to initial state...");
 
     try {
-      // 1️⃣ Remove all flight paths and geofences
-      viewer.dataSources.removeAll();
-
-      // 2️⃣ Remove all entities (like airplanes, lines, etc.)
       viewer.entities.removeAll();
 
-      // 3️⃣ Reset camera to initial view (set to your preferred home view)
-      viewer.camera.flyHome(1.5); // smooth animation
+      const keepList = [
+        window.geofence200DataSource,
+        window.geofence300DataSource,
+        window.geofence600DataSource,
+        window.geohubsDataSource
+      ];
 
-      // 4️⃣ Optionally reset global variables if you have them
-      window.geofence200DataSource = null;
-      window.geofence300DataSource = null;
-      window.geofence600DataSource = null;
-      window.geofenceEmergencyDataSource = null;
+      viewer.dataSources._dataSources
+        .filter(ds => !keepList.includes(ds))
+        .forEach(ds => viewer.dataSources.remove(ds));
 
-      // 5️⃣ Reset any UI toggles (optional)
+      (async () => {
+        await loadGeoJsonLinesFromIon(3831242, viewer, {
+          color: Cesium.Color.YELLOW,
+          width: 5,
+          outline: true,
+          clampToGround: false
+        });
+      })();
+
+      viewer.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(
+          -74.34352939984555,
+          40.229377873086555,
+          35000
+        ),
+        orientation: {
+          heading: Cesium.Math.toRadians(30),
+          pitch: Cesium.Math.toRadians(-35),
+          roll: 0
+        },
+        duration: 3  // seconds for smooth fly animation
+      });
+
+      //Reset any UI toggles (optional)
       document.querySelectorAll('button.active').forEach(btn => btn.classList.remove('active'));
 
       console.log("✅ Viewer reset successfully");
