@@ -359,6 +359,36 @@ function clearPreviousModes() {
     }
   }
 
+  // === RESET FUNCTION ===
+  async function resetViewer() {
+    console.log("🔄 Resetting viewer to initial state...");
+
+    try {
+      // 1️⃣ Remove all flight paths and geofences
+      viewer.dataSources.removeAll();
+
+      // 2️⃣ Remove all entities (like airplanes, lines, etc.)
+      viewer.entities.removeAll();
+
+      // 3️⃣ Reset camera to initial view (set to your preferred home view)
+      viewer.camera.flyHome(1.5); // smooth animation
+
+      // 4️⃣ Optionally reset global variables if you have them
+      window.geofence200DataSource = null;
+      window.geofence300DataSource = null;
+      window.geofence600DataSource = null;
+      window.geofenceEmergencyDataSource = null;
+
+      // 5️⃣ Reset any UI toggles (optional)
+      document.querySelectorAll('button.active').forEach(btn => btn.classList.remove('active'));
+
+      console.log("✅ Viewer reset successfully");
+    } catch (err) {
+      console.error("Error resetting viewer:", err);
+    }
+  }
+
+
   function highlightActiveButton(activeId) {
     ["mode1-btn", "mode2-btn", "mode3-btn"].forEach(id => {
       const btn = document.getElementById(id);
@@ -416,6 +446,9 @@ function clearPreviousModes() {
   document.getElementById("mode3-btn").addEventListener("click", async () => {
     await activateMode3();
     highlightActiveButton("mode3-btn");
+  });
+  document.getElementById("reset-btn").addEventListener("click", async () => {
+    await resetViewer();
   });
 
 }
