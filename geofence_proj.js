@@ -401,13 +401,10 @@ function clearPreviousModes() {
         duration: 3  // seconds for smooth fly animation
       });
 
-      // 4️⃣ Reset mode buttons’ visual state (remove "active" highlight)
-      const modeButtons = document.querySelectorAll('#mode1-btn, #mode2-btn, #mode3-btn');
-      modeButtons.forEach(btn => btn.classList.remove('active'));
-
-      // 5️⃣ (Optional) Reset any geofence toggle button state
-      const geofenceButtons = document.querySelectorAll('#toggle-geof-200, #toggle-geof-300, #toggle-geof-600');
-      geofenceButtons.forEach(btn => btn.classList.remove('active'));
+      ["mode1-btn", "mode2-btn", "mode3-btn"].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.style.background = "#444"; // default inactive color
+      });
 
       console.log("✅ Viewer reset successfully");
     } catch (err) {
