@@ -1,10 +1,9 @@
-# 🛰️ Cesium Certified Developer Project: <Project Title>
+# 🛰 Cesium Certified Developer Project: Visualization of 3D Geofences and a 3D Network for Air-Taxis in New York city.
 
 ## 📘 About the Project
-This project showcases an interactive 3D web application developed as part of the **Cesium Certified Developer Program**.  
-It leverages **CesiumJS** and **Cesium ion** to visualize, analyze, and interact with real-world spatial data in a browser environment.
-
-The goal of the project is to <briefly describe what your app does, e.g. “simulate solar access and shading over residential rooftops using 3D terrain and building models.”>
+**Project Objective:** 
+This project aims to **realistically visualize the main three-dimensional components** derived from the research [*“An Adaptable and Scalable Least-Cost Network for Air Taxis in Urban Areas.”*](https://www.researchgate.net/profile/Moritz-Hildemann/publication/335146711_An_adaptable_and_scalable_least_cost_network_for_air-taxis_in_urban_areas_Study_area_Manhattan_New_York/links/5d52d108299bf16f07368bf7/An-adaptable-and-scalable-least-cost-network-for-air-taxis-in-urban-areas-Study-area-Manhattan-New-York.pdf)  
+Using CesiumJS, it provides an interactive 3D environment to explore potential air-taxi routes, vertihubs locations, and supporting urban infrastructure restrictions across New York City. The visualization integrates geographic data, elevation models, and infrastructure datasets to communicate complex spatial relationships intuitively.
 
 ---
 
@@ -23,6 +22,10 @@ All data is processed before visualization to ensure correct geolocation and per
 3. **Integration**
    - Link processed datasets with metadata and load dynamically into the Cesium viewer  
 
+Cesium Certified Developer Program
+Project Name: Visualization of 3D Geofences and a 3D Network for Air-Taxis in New York.
+Project Objective: To realistically visualize the main three-dimensional elements resulting from the project "An adaptable and scalable least-cost network for air taxis in urban areas. Study area: Manhattan, New York."
+Author: Carlos Delgado
 ---
 
 ## 🔁 Flow Diagram
