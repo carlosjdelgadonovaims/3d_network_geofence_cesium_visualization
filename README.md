@@ -10,7 +10,7 @@ Through the implementation of Cesium JS, the project provides a suitable environ
 Back in 2019, my friend and colleague Moritz Hildemann and I developed a project for the GIS Applications subject at the Master's Degree in Geospatial Technologies, a project that addresses the challenge of designing air taxi routes in urban environments that are safe, efficient, and minimally disruptive to citizens, while respecting legal and practical constraints in three-dimensional urban airspace.
 
 ## 🧩 Data inputs and preliminary requirements
-Before starting the development of this specific project, the following datasets, software, and libraries were required.
+Before starting the development of this specific project, the following datasets, software, and libraries were required. Please note that most of the data used as inputs in this project were outputs obtained from the aforementioned paper published at the AGILE 2019 conference.
 
 ### 📂 Data Requirements
 
