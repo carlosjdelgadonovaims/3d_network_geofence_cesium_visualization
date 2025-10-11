@@ -2,7 +2,7 @@
 
 ## 📘 About the Project
 **Project Objective:** 
-This project aims to **realistically visualize the main three-dimensional components** derived from the research [*“An Adaptable and Scalable Least-Cost Network for Air Taxis in Urban Areas.”*](https://www.researchgate.net/profile/Moritz-Hildemann/publication/335146711_An_adaptable_and_scalable_least_cost_network_for_air-taxis_in_urban_areas_Study_area_Manhattan_New_York/links/5d52d108299bf16f07368bf7/An-adaptable-and-scalable-least-cost-network-for-air-taxis-in-urban-areas-Study-area-Manhattan-New-York.pdf)  
+This project aims to **realistically visualize the main three-dimensional components** derived from the research [*“An Adaptable and Scalable Least-Cost Network for Air Taxis in Urban Areas.”*](https://www.researchgate.net/publication/341173954_An_adaptable_and_scalable_least-cost_network_for_air-taxis_in_urban_areas_Study_area_Manhattan_New_York)  
 Using CesiumJS, it provides an interactive 3D environment to explore potential air-taxi routes, vertihubs locations, and supporting urban infrastructure restrictions across New York City. The visualization integrates geographic data, elevation models, and infrastructure datasets to communicate complex spatial relationships intuitively.
 
 ---
