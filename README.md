@@ -11,63 +11,40 @@ Back in 2019, my friend and colleague Moritz Hildemann and I developed a project
 
 **Summary of the methodology:**
 
-## 🧩 Data Processing Workflow
+  * Data Acquisition & Preprocessing
 
-This section summarizes the geospatial data processing stages applied to generate the 3D least-cost air taxi network for Manhattan, New York.  
-The methodology follows the framework described in the research paper [*An Adaptable and Scalable Least-Cost Network for Air Taxis in Urban Areas*](https://www.researchgate.net/publication/341173954_An_adaptable_and_scalable_least-cost_network_for_air-taxis_in_urban_areas_Study_area_Manhattan_New_York).
+    - **Sources:**  
+      - Building height datasets from **NYC Open Data**  
+      - **OpenStreetMap** for urban features and infrastructure  
+      - **FAA obstacle maps** for airspace restrictions  
+    
+    - **Preparation Steps:**  
+      - Digitized and standardized thematic layers such as no-fly zones, land-use constraints (hospitals, schools, parks), and restricted corridors.  
+      - Implemented **3D geofences** by extruding vertical buffers around restricted areas, based on altitude and safety regulations.  
 
----
+  * Generate Cost Surface (Least-Cost Surface)
+      
+      - Converted 3D geofences and building rooftop elevation layers into **interpolation points**.  
+      - Applied **Inverse Distance Weighting (IDW)** interpolation to create a **continuous raster surface** representing the minimum feasible flight height and associated traversal cost.  
+      - The resulting **cost surface encodes spatial impedance**, integrating both vertical (altitude) and horizontal (distance) components to represent the relative difficulty of navigating through space.  
 
-### 🗺️ 1. Data Acquisition & Preprocessing
+  * Least-Cost Path & Network Generation
 
-- **Sources:**  
-  - Building height datasets from **NYC Open Data**  
-  - **OpenStreetMap** for urban features and infrastructure  
-  - **FAA obstacle maps** for airspace restrictions  
+      - Used the **Cost Connectivity Tool** in *ArcGIS Pro* to compute optimal (least-accumulated cost) routes between defined **origin and destination hubs**.  
+      - Introduced a **cost parameter** to control how altitude (vertical movement) influences route selection, allowing trade-offs between:
+        - Minimizing total distance  
+        - Avoiding overflight of sensitive zones or congested areas  
+      - Defined **candidate vertiports** as manually selected hub points from which routing was initiated and evaluated based on cost surface data.  
 
-- **Preparation Steps:**  
-  - Digitized and standardized thematic layers such as no-fly zones, land-use constraints (hospitals, schools, parks), and restricted corridors.  
-  - Implemented **3D geofences** by extruding vertical buffers around restricted areas, based on altitude and safety regulations.  
+  * Dynamic Impedances & Scalability
+      
+      - Integrated **dynamic geofences** (e.g., temporary flight restrictions due to events or emergencies) that trigger **automatic network recalculation** to reroute air taxis safely.  
+      - Designed the network to be **scalable**—capable of adapting to increased demand by introducing **vertical layering or alternate flight corridors** as needed.  
 
----
+  * Visualization & Output
 
-### 🌐 2. Generate Cost Surface (Least-Cost Surface)
-
-- Converted 3D geofences and building rooftop elevation layers into **interpolation points**.  
-- Applied **Inverse Distance Weighting (IDW)** interpolation to create a **continuous raster surface** representing the minimum feasible flight height and associated traversal cost.  
-- The resulting **cost surface encodes spatial impedance**, integrating both vertical (altitude) and horizontal (distance) components to represent the relative difficulty of navigating through space.  
-
----
-
-### 🛫 3. Least-Cost Path & Network Generation
-
-- Used the **Cost Connectivity Tool** in *ArcGIS Pro* to compute optimal (least-accumulated cost) routes between defined **origin and destination hubs**.  
-- Introduced a **cost parameter** to control how altitude (vertical movement) influences route selection, allowing trade-offs between:
-  - Minimizing total distance  
-  - Avoiding overflight of sensitive zones or congested areas  
-- Defined **candidate vertiports** as manually selected hub points from which routing was initiated and evaluated based on cost surface data.  
-
----
-
-### ⚙️ 4. Dynamic Impedances & Scalability
-
-- Integrated **dynamic geofences** (e.g., temporary flight restrictions due to events or emergencies) that trigger **automatic network recalculation** to reroute air taxis safely.  
-- Designed the network to be **scalable**—capable of adapting to increased demand by introducing **vertical layering or alternate flight corridors** as needed.  
-
----
-
-### 🗺️ 5. Visualization & Output
-
-- Produced 3D visualizations of the resulting **networks, geofences, and cost surfaces** using *ArcGIS Pro* and CesiumJS.  
-- The model is **semi-automatic and parameter-driven**, ensuring adaptability to other cities, datasets, or regulatory frameworks.  
-
----
-
-> 📖 **Reference:**  
-> Hildemann, M., & Delgado, C. J. (2019). *An Adaptable and Scalable Least-Cost Network for Air Taxis in Urban Areas: Study Area—Manhattan, New York.*  
-> AGILE 2019 Conference. [ResearchGate](https://www.researchgate.net/publication/341173954_An_adaptable_and_scalable_least-cost_network_for_air-taxis_in_urban_areas_Study_area_Manhattan_New_York)
-
-
+      - Produced 3D visualizations of the resulting **networks, geofences, and cost surfaces** using *ArcGIS Pro* and CesiumJS.  
+      - The model is **semi-automatic and parameter-driven**, ensuring adaptability to other cities, datasets, or regulatory frameworks.  
 ---
 
 ## 🧩 Data Processing
