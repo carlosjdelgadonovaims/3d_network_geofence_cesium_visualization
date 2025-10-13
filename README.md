@@ -37,5 +37,8 @@ Before starting the development of this specific project, the following datasets
  - **QGIS / ArcGIS Pro** — for GIS data preparation, processing, and export  
 
 ## 🔁 Flow Diagram
-Below is a simplified workflow of the system:
+Below is a general scheme used when developing the app:
+<p align="center">
+  <img src="./public/images/Workflow.png" alt="Workflow Diagram" width="700">
+</p>
 
