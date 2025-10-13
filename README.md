@@ -74,3 +74,16 @@ Proposed design and functionality
 <p align="center">
   <img src="./public/images/Mock Design.png" alt="Workflow Diagram" width="700">
 </p>
+
+## 💻 Codebase
+
+The project is composed of two main files:
+
+- [`index.html`](./index.html) — The main entry point of the application.  
+  It initializes the Cesium viewer, loads styles and scripts, and defines the structure for the 3D visualization.
+
+- [`geofence_proj.js`](./geofence_proj.js) — Contains the core logic of the project.  
+  It loads and renders GeoJSON data (geofences, vertiports, and flight paths), handles dynamic visual updates, and controls Cesium’s entity behavior during animations.
+
+Both files work together to visualize air-taxi networks and their operational constraints in a realistic 3D environment using **CesiumJS** and **Cesium ION**.
+
