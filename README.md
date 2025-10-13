@@ -6,8 +6,35 @@
 This project aims to **realistically visualize the main three-dimensional components** derived from the research [*“An Adaptable and Scalable Least-Cost Network for Air Taxis in Urban Areas.”*](https://www.researchgate.net/publication/341173954_An_adaptable_and_scalable_least-cost_network_for_air-taxis_in_urban_areas_Study_area_Manhattan_New_York)  
 Through the implementation of Cesium JS, the project provides a suitable environment to explore potential 3D routes for air taxis, Vertihubs, and Flight Restrictions based on real and existing regulations recommended by agencies, authorities, and designers of electric sandcraft of the eVTOL (Electrical Vertical Take-Off and Landing) type.
 
+**Specific Objectives:**
+
+1. Visualize 3D geofences according to restriction orders, allowing different layers to be turned on and off in the geographic viewer.
+2. Visualize the 3D route network for air taxis.
+3. Allow the user to compare the different existing buildings with the estimated 3D geofences and 3D route network.
+4. Visualize the route of an air taxi passing through different hubs along its way and following the generated 3D route.
+5. Visualize a single air taxi route between two stations.
+6. Visualize the alternate route between the two stations in Objective 5 when a geofence exists due to an emergency.
+
 **A little context:**
 Back in 2019, my friend and colleague Moritz Hildemann and I developed a project for the GIS Applications subject at the Master's Degree in Geospatial Technologies, a project that addresses the challenge of designing air taxi routes in urban environments that are safe, efficient, and minimally disruptive to citizens, while respecting legal and practical constraints in three-dimensional urban airspace.
+
+To better understand 3D geofences, they were grouped according to the POIs considered in the paper:
+
+#### 🏗️ Vertical and Horizontal Restrictions
+
+| Landuse             | Vertical (m) | Horizontal (m) |
+|---------------------|--------------|----------------|
+| Airport             | 600          | Dynamic        |
+| Hospitals           | 300          | 300            |
+| Universities        | 200          | 300            |
+| Embassies           | 300          | 300            |
+| Parks               | 300          | 100            |
+| Graveyards          | 300          | 100            |
+| Recreational areas  | 300          | 100            |
+| Rooftops            | 152.4        | -              |
+
+*Table 1. Vertical and horizontal restrictions in meters.*
+
 
 ## 🧩 Data inputs and preliminary requirements
 Before starting the development of this specific project, the following datasets, software, and libraries were required. Please note that most of the data used as inputs in this project were outputs obtained from the aforementioned paper published at the AGILE 2019 conference.
