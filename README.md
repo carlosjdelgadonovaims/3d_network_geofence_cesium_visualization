@@ -27,6 +27,7 @@ Before starting the development of this specific project, the following datasets
  - **Flight Path (Alternate Route with Emergency Geofence)** — JSON format  
    - Simulates rerouting behavior when an emergency geofence is active.  
  - **Building Tileset** — imported from **OSM Buildings**
+ - **VTOL 3D Air-Taxi Model** - downloaded from Sketchfab (CC Attribution 4.0 International)
  
  ### 🧰 Software & Libraries
  
