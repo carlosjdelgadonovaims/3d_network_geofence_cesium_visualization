@@ -66,7 +66,7 @@ Before starting the development of this specific project, the following datasets
 ## 🔁 Flow Diagram
 Below is a general scheme used when developing the app:
 <p align="center">
-  <img src="./public/images/Workflow.png" alt="Workflow Diagram" width="700">
+  <img src="./public/images/Mock Design.png" alt="Workflow Diagram" width="700">
 </p>
 
 ## 🖌️Design
