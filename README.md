@@ -3,15 +3,14 @@
 ## 📑 Table of Contents
 
 1. [About the Project](#-about-the-project)
-2. [Data Acquisition & Preprocessing](#-data-acquisition--preprocessing)
+2. [Data inputs and preliminary requirements](#-data-inputs-and-preliminary-requirements)
 3. [Workflow Diagram](#-workflow-diagram)
-4. [Designs](#-designs)
-5. [Challenges & Solutions](#-challenges--solutions)
-6. [Codebase](#-codebase)
+4. [Design](#-design)
+5. [Codebase](#-codebase)
+6. [Demo](#-demo)
 7. [Live Demo](#-live-demo)
-8. [Video Demos](#-video-demos)
-9. [Future Work](#-future-work)
-10. [Acknowledgments](#-acknowledgments)
+8. [Future Work](#-future-work)
+9. [Acknowledgments](#-acknowledgments)
 
 ## 📘 About the Project
 **Project Objective:** 
@@ -49,8 +48,8 @@ To better understand 3D geofences, they were grouped according to the POIs consi
 *Table 1. Vertical and horizontal restrictions in meters.*
 
 Geofences Scheme:
-<p align="center">
-  <img src="./public/images/Geofences_scheme.png" alt="Geofences Scheme" width="400">
+<p align="left">
+  <img src="./public/images/Geofences_scheme.png" alt="Geofences Scheme" width="550">
 </p>
 
 ## 🧩 Data inputs and preliminary requirements
@@ -80,7 +79,7 @@ Before starting the development of this specific project, the following datasets
  - **Visual Studio Code** — development environment for Cesium scripts  
  - **QGIS / ArcGIS Pro** — for GIS data preparation, processing, and export  
 
-## 🔁 Flow Diagram
+## 🔁 Workflow Diagram
 Below is a general scheme used when developing the app:
 <p align="center">
   <img src="./public/images/Workflow.png" alt="Workflow Diagram" width="700">
@@ -125,12 +124,12 @@ Below are four short Loom videos demonstrating the main functionalities and visu
    Illustrates how an emergency geofence activates dynamically, forcing the system to recalculate and visualize an alternate flight path from one shown in the pre-emergency.
    ▶️ [Watch on Loom](https://www.loom.com/share/6fe41700c8c746cdadc54ba22ec10a5b?sid=3f37bd66-b039-47b6-9be3-7c77f6dad1b0)
 
-## 🌐 Live Demo ##
+## 🌐 Live Demo
 
 Access the published application here:  
 👉 [**Launch the Air-Taxi 3D Visualization App**](https://carlosjdelgadonovaims.github.io/3d_network_geofence_cesium_visualization/)
 
-## 🚀 Future Work ##
+## 🚀 Future Work
 
 Many improvements can be proposed for this project, which I thoroughly enjoyed developing while integrating knowledge from **Cesium tutorials** and the **Cesium Community Forum**.  
 Below are some ideas for future enhancements and extensions that could further strengthen this work:
@@ -150,7 +149,7 @@ Below are some ideas for future enhancements and extensions that could further s
 - **Integration of Environmental and Operational Parameters**  
   Incorporate additional simulation layers such as **noise emissions**, **fuel consumption**, and **wind speed/direction** to create a more **comprehensive and realistic visualization** of flight operations.
 
-## 🙏 Acknowledgments ##
+## 🙏 Acknowledgments
 
 I would like to sincerely thank Cesium for this incredible opportunity to participate in the Certified Developer Program. It has been a rewarding experience that I’m sure will open many doors in both my academic and professional path.
 
