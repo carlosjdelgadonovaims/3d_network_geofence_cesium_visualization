@@ -12,8 +12,8 @@ Through the implementation of Cesium JS, the project provides a suitable environ
 2. Visualize the 3D route network for air taxis.
 3. Allow the user to compare the different existing buildings with the estimated 3D geofences and 3D route network.
 4. Visualize the route of an air taxi passing through different hubs along its way and following the generated 3D route.
-5. Visualize a single air taxi route between two stations.
-6. Visualize the alternate route between the two stations in Objective 5 when a geofence exists due to an emergency.
+5. Visualize a short air taxi route between some hubs (pre-emergency or normal situation).
+6. Visualize the alternate route visualized in Objective 5 when a geofence exists due to an emergency (emergency situation).
 
 **A little context:**
 Back in 2019, my friend and colleague Moritz Hildemann and I developed a project for the GIS Applications subject at the Master's Degree in Geospatial Technologies, a project that addresses the challenge of designing air taxi routes in urban environments that are safe, efficient, and minimally disruptive to citizens, while respecting legal and practical constraints in three-dimensional urban airspace.
@@ -72,7 +72,7 @@ Below is a general scheme used when developing the app:
 ## 🖌️Design
 Proposed design and functionality
 <p align="center">
-  <img src="./public/images/Mock Design.png" alt="Workflow Diagram" width="700">
+  <img src="./public/images/Mock_design.png" alt="Workflow Diagram" width="700">
 </p>
 
 ## 💻 Codebase
