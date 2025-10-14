@@ -85,7 +85,7 @@ Below is a general scheme used when developing the app:
   <img src="./public/images/Workflow.png" alt="Workflow Diagram" width="700">
 </p>
 
-## 🖌️Design
+## 🖌️ Design
 Proposed design and functionality
 <p align="center">
   <img src="./public/images/Mock_design.png" alt="Workflow Diagram" width="700">
