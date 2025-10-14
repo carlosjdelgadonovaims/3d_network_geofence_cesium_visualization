@@ -1,5 +1,18 @@
 # 🛰 Cesium Certified Developer Project: Visualization of 3D Geofences and a 3D Network for Air-Taxis in New York city.
 
+## 📑 Table of Contents
+
+1. [About the Project](#-about-the-project)
+2. [Data Acquisition & Preprocessing](#-data-acquisition--preprocessing)
+3. [Workflow Diagram](#-workflow-diagram)
+4. [Designs](#-designs)
+5. [Challenges & Solutions](#-challenges--solutions)
+6. [Codebase](#-codebase)
+7. [Live Demo](#-live-demo)
+8. [Video Demos](#-video-demos)
+9. [Future Work](#-future-work)
+10. [Acknowledgments](#-acknowledgments)
+
 ## 📘 About the Project
 **Project Objective:** 
 
@@ -35,6 +48,10 @@ To better understand 3D geofences, they were grouped according to the POIs consi
 
 *Table 1. Vertical and horizontal restrictions in meters.*
 
+Geofences Scheme:
+<p align="center">
+  <img src="./public/images/Geofences_scheme.png" alt="Geofences Scheme" width="400">
+</p>
 
 ## 🧩 Data inputs and preliminary requirements
 Before starting the development of this specific project, the following datasets, software, and libraries were required. Please note that most of the data used as inputs in this project were outputs obtained from the aforementioned paper published at the AGILE 2019 conference.
