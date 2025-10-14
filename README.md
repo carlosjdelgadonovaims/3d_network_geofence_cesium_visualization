@@ -87,3 +87,26 @@ The project is composed of two main files:
 
 Both files work together to visualize air-taxi networks and their operational constraints in a realistic 3D environment using **CesiumJS** and **Cesium ION**.
 
+
+## 🎥 Demo
+
+Below are four short Loom videos demonstrating the main functionalities and visualization stages of the project.
+
+1. **Initial 3D Geofences + 3D Route Network Visualization**  
+   Demonstrates the integration of geofences at multiple restriction levels and the rendering of the 3D air-taxi route network across Manhattan.  
+   ▶️ [Watch on Loom](https://www.loom.com/share/569f5f7288ee4d4896ce623eab672c30?sid=42cebd43-2946-4e0c-b638-1955be70137f)
+
+2. **Air-Taxi Flight Tracking – Long Route (Multiple Hubs)**  
+   Shows a full air-taxi trajectory passing through several vertiports using the least-cost network approach.  
+   ▶️ [Watch on Loom](https://www.loom.com/share/ee13b494bfa94415980ea3454596680d?sid=372e3097-22ec-4b43-92bb-749f693b27d3)
+
+3. **Air-Taxi Flight Tracking – Short Route (Pre-Emergency Scenario)**  
+   Displays a normal short flight path between two hubs before any emergency restriction is triggered.  
+   ▶️ [Watch on Loom](https://www.loom.com/share/0513b317abbe4fcf96ce6623691ab042?sid=a6b548e5-207b-462f-a5d1-2f4b3c438bd0)
+
+4. **Air-Taxi Flight Tracking – Short Route with Emergency Geofence**  
+   Illustrates how an emergency geofence activates dynamically, forcing the system to recalculate and visualize an alternate flight path from one shown in the pre-emergency.
+   ▶️ [Watch on Loom](https://www.loom.com/share/6fe41700c8c746cdadc54ba22ec10a5b?sid=3f37bd66-b039-47b6-9be3-7c77f6dad1b0)
+
+
+
