@@ -108,5 +108,37 @@ Below are four short Loom videos demonstrating the main functionalities and visu
    Illustrates how an emergency geofence activates dynamically, forcing the system to recalculate and visualize an alternate flight path from one shown in the pre-emergency.
    ▶️ [Watch on Loom](https://www.loom.com/share/6fe41700c8c746cdadc54ba22ec10a5b?sid=3f37bd66-b039-47b6-9be3-7c77f6dad1b0)
 
+## 🌐 Live Demo ##
+
+Access the published application here:  
+👉 [**Launch the Air-Taxi 3D Visualization App**](https://carlosjdelgadonovaims.github.io/3d_network_geofence_cesium_visualization/)
+
+## 🚀 Future Work ##
+
+Many improvements can be proposed for this project, which I thoroughly enjoyed developing while integrating knowledge from **Cesium tutorials** and the **Cesium Community Forum**.  
+Below are some ideas for future enhancements and extensions that could further strengthen this work:
+
+- **Automated Geoprocessing Service**  
+  Develop a service that automatically executes geoprocessing models and exports outputs in formats that can be seamlessly uploaded to **Cesium ION**.  
+  This would enable **dynamic generation of 3D routes and geofences** directly from external data sources.
+
+- **Optional Auto-Tracking for Air-Taxi Animations**  
+  In this version, the air-taxi trajectory was intentionally not auto-tracked to allow users to freely explore the 3D scene.  
+  A future improvement could include a **toggle button** that enables or disables **automatic camera tracking** of the air-taxi’s movement.
+
+- **3D Tiles for Geofences**  
+  Explore the possibility of generating **3D Tilesets** for geofences instead of GeoJSON polygons.  
+  This would enhance **rendering performance** and **visual detail**, especially when working with large-scale datasets.
+
+- **Integration of Environmental and Operational Parameters**  
+  Incorporate additional simulation layers such as **noise emissions**, **fuel consumption**, and **wind speed/direction** to create a more **comprehensive and realistic visualization** of flight operations.
+
+## 🙏 Acknowledgments ##
+
+I would like to sincerely thank Cesium for this incredible opportunity to participate in the Certified Developer Program. It has been a rewarding experience that I’m sure will open many doors in both my academic and professional path.
+
+My deepest appreciation also goes to the University of NOVA (Portugal), the University of Münster (Germany), and the University Jaume I (Spain) — and to the entire Erasmus Mundus Master’s Program in Geospatial Technologies, from which I graduated in 2020. The knowledge and skills I gained there have remained essential throughout my career.
+
+Finally, I want to express special thanks to my friend and colleague Moritz Hildemann, with whom I co-authored the 2019 paper that inspired the creation of this project.
 
 
