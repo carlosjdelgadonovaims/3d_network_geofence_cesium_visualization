@@ -7,10 +7,11 @@
 3. [Workflow Diagram](#-workflow-diagram)
 4. [Design](#-design)
 5. [Codebase](#-codebase)
-6. [Demo](#-demo)
-7. [Live Demo](#-live-demo)
-8. [Future Work](#-future-work)
-9. [Acknowledgments](#-acknowledgments)
+6. [Flight Analysis Tools](#-flight-analysis-tools)
+7. [Demo](#-demo)
+8. [Live Demo](#-live-demo)
+9. [Future Work](#-future-work)
+10. [Acknowledgments](#-acknowledgments)
 
 ## 📘 About the Project
 **Project Objective:** 
@@ -93,7 +94,7 @@ Proposed design and functionality
 
 ## 💻 Codebase
 
-The project is composed of two main files:
+The project is composed of three main files:
 
 - [`index.html`](./index.html) — The main entry point of the application.  
   It initializes the Cesium viewer, loads styles and scripts, and defines the structure for the 3D visualization.
@@ -101,8 +102,21 @@ The project is composed of two main files:
 - [`geofence_proj.js`](./geofence_proj.js) — Contains the core logic of the project.  
   It loads and renders GeoJSON data (geofences, vertiports, and flight paths), handles dynamic visual updates, and controls Cesium’s entity behavior during animations.
 
-Both files work together to visualize air-taxi networks and their operational constraints in a realistic 3D environment using **CesiumJS** and **Cesium ION**.
+- [`flight_analysis.js`](./flight_analysis.js) — Analysis tools added on top of the base visualization: rooftop-rule building highlight, playback controls, safety corridor and elevation profile (see below).
 
+These files work together to visualize air-taxi networks and their operational constraints in a realistic 3D environment using **CesiumJS** and **Cesium ION**.
+
+
+## 🧭 Flight Analysis Tools
+
+A set of tools in the **Analysis** and **Playback** sections of the control panel:
+
+- **Highlight buildings > 152.4 m** — Restyles the OSM Buildings tileset with a `Cesium3DTileStyle`: buildings taller than the 152.4 m rooftop restriction turn red, all others stay white. Click again to restore the default style.
+- **Safety corridor (50 m)** — Draws a translucent 50 m clearance buffer around the active flight path: a tube (`polylineVolume`) along the horizontal legs and a cylinder for each vertical take-off and landing segment.
+- **Elevation profile** — A chart (Chart.js) of height against distance along the active flight path, with dashed reference lines for the rooftop limit (152.4 m) and the low (200 m) and medium (300 m) restriction ceilings. A marker follows the air taxi during the animation, and clicking the chart jumps the animation to that point of the path.
+- **Playback controls** — Pause/play, restart, and speed buttons (0.5×, 1×, 2×, 4×) relative to the default animation speed. The selected speed is kept when switching modes.
+
+The corridor radius, rooftop limit and reference ceilings can be changed in `ANALYSIS_CONFIG` at the top of `flight_analysis.js`.
 
 ## 🎥 Demo
 

@@ -8,6 +8,7 @@
     href="https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Widgets/widgets.css"
     rel="stylesheet"
   />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
   
   <style>
     html, body, #cesiumContainer {
@@ -37,6 +38,88 @@
     button:hover {
       background: #666;
     }
+    button.active, button.active:hover {
+      background: #00b894;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    .control-panel hr {
+      width: 100%;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.25);
+      margin: 4px 0;
+    }
+    .section-title {
+      color: #ccc;
+      font: 600 11px sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .row {
+      display: flex;
+      gap: 5px;
+    }
+    .row button {
+      flex: 1;
+    }
+    .legend {
+      color: #ddd;
+      font: 11px sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .legend[hidden] {
+      display: none;
+    }
+    .swatch {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .profile-panel {
+      position: fixed;
+      right: 10px;
+      bottom: 40px;
+      z-index: 10;
+      width: min(440px, calc(100vw - 20px));
+      height: 250px;
+      box-sizing: border-box;
+      background: rgba(0,0,0,0.65);
+      border-radius: 10px;
+      padding: 8px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      color: #ddd;
+      font: 12px sans-serif;
+    }
+    .profile-panel[hidden] {
+      display: none;
+    }
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .profile-header strong {
+      color: #fff;
+    }
+    .profile-canvas-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+    }
+    .profile-hint {
+      color: #999;
+      font-size: 10px;
+      margin-top: 2px;
+    }
   </style>
 </head>
 <body>
@@ -49,8 +132,44 @@
     <button id="mode2-btn"> Mode 2 – Pre Emergency</button>
     <button id="mode3-btn"> Mode 3 – Emergency</button>
     <button id="reset-btn">Reset</button>
+    <hr>
+    <div class="section-title">Analysis</div>
+    <button id="toggle-rooftop">Highlight buildings &gt; 152.4 m</button>
+    <div id="rooftop-legend" class="legend" hidden>
+      <span><span class="swatch" style="background:#ff3b3b"></span>Above rooftop limit</span>
+      <span><span class="swatch" style="background:#ffffff"></span>Below rooftop limit</span>
+    </div>
+    <button id="toggle-corridor" class="active">Safety corridor (50 m)</button>
+    <button id="toggle-profile" class="active">Elevation profile</button>
+    <hr>
+    <div class="section-title">Playback</div>
+    <div class="row">
+      <button id="pause-btn">⏸ Pause</button>
+      <button id="restart-btn">⟲ Restart</button>
+    </div>
+    <div class="row">
+      <button class="speed-btn" data-speed="0.5">0.5×</button>
+      <button class="speed-btn active" data-speed="1">1×</button>
+      <button class="speed-btn" data-speed="2">2×</button>
+      <button class="speed-btn" data-speed="4">4×</button>
+    </div>
+  </div>
+
+  <div id="profile-panel" class="profile-panel" hidden>
+    <div class="profile-header">
+      <strong>Elevation profile</strong>
+      <span id="profile-total"></span>
+    </div>
+    <div class="profile-canvas-wrap">
+      <canvas id="profile-chart"></canvas>
+    </div>
+    <div class="profile-header profile-hint">
+      <span id="profile-now"></span>
+      <span>Click the chart to jump to that point</span>
+    </div>
   </div>
   <div id="cesiumContainer"></div>
+  <script src="flight_analysis.js"></script>
   <script src="geofence_proj.js"></script>
 </body>
 </html>
