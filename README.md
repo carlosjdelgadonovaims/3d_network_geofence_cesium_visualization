@@ -118,6 +118,10 @@ A set of tools in the **Analysis** and **Playback** sections of the control pane
 
 The corridor radius, rooftop limit and reference ceilings can be changed in `ANALYSIS_CONFIG` at the top of `flight_analysis.js`.
 
+**Demo of last improvements:**
+  ▶️ [Watch on Loom](https://www.loom.com/share/ecfe7815bb57402d8c462cf73afaf8b1)
+
+
 ## 🎥 Demo
 
 Below are four short Loom videos demonstrating the main functionalities and visualization stages of the project.
