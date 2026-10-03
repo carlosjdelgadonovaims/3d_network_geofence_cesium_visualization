@@ -40,6 +40,10 @@ async function main() {
   const buildingTileset = await Cesium.createOsmBuildingsAsync();
   viewer.scene.primitives.add(buildingTileset);
 
+  // Flight analysis tools: rooftop highlight, playback controls,
+  // safety corridor and elevation profile (see flight_analysis.js)
+  const analysis = setupFlightAnalysis({ viewer, buildingTileset });
+
   // Loading geofence and hub resources from Cesium ION
   const resource_geofence_1        = await Cesium.IonResource.fromAssetId(3831256);
   const resource_geofence_2        = await Cesium.IonResource.fromAssetId(3831260);
@@ -232,6 +236,9 @@ async function main() {
       path: new Cesium.PathGraphics({ width: 2 })
     });
 
+    // Safety corridor + elevation profile for this flight
+    analysis.registerFlight({ data, start, timeStep, pauseDuration, color, playbackSpeed });
+
     if (flyTo) {
       viewer.flyTo(airplaneEntity, {
         offset: new Cesium.HeadingPitchRange(0.0, -0.5, 3000.0)
@@ -245,6 +252,7 @@ async function main() {
   //Clear previous mode data function
   function clearPreviousModes() {
     console.log("Clearing previous modes...");
+    analysis.clearFlight();
     viewer.entities.removeAll();
 
     const keepList = [
@@ -306,6 +314,7 @@ async function main() {
   // Reset function
   async function resetViewer() {
     console.log("Resetting viewer to initial state...");
+    analysis.clearFlight();
     viewer.entities.removeAll();
 
     const keepList = [
